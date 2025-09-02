@@ -1,0 +1,17 @@
+[package]
+name = "frontend"
+version = "0.1.0"
+edition = "2024"
+
+
+
+[dependencies]
+leptos = { version = "0.6", features = ["csr"] }
+leptos_router = { version="0.6.0-rc1",features = ["csr"] }
+console_error_panic_hook = "0.1"
+log = "0.4.27"
+
+[package.metadata.leptos]
+output-name = "frontend"
+site-root = "target/site"
+site-pkg-dir = "pkg"

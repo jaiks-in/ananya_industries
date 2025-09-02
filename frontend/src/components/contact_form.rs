@@ -1,17 +1,14 @@
 use leptos::*;
 use web_sys::console;
-#[component]
-pub fn Contactform() -> impl IntoView {
-    fn submit_handler(e){
-       println!("{:?}",e);
+pub fn ContactForm() -> impl IntoView {
+    fn submit_handler(){
+       println!("this ");
     }
   view!{
         <div>
             <section class="feedback_section">
-                <form on:sumbit=submit_handler>
-                    <label for="name">Name</label>
-                    <input id="name" type="text" placeholder="enter your name"/>
-                </Form>
+
+      this is form
             </section>
 
       </div>
