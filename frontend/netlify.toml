@@ -1,11 +1,7 @@
 [build]
 # First, install the necessary `cargo-leptos` tool, then run the build command.
-# The `&&` operator ensures the second command only runs if the first one succeeds.
-command = " trunk build --release && trunk serve --open --port 4004 "
-
-# This is the directory where the compiled static files (HTML, CSS, JS) are placed.
-publish = "target/site"
-
+command = "cargo install --locked trunk && trunk build"
+  publish = "target/site"
 [functions]
 # This is the directory where the Rust serverless function is placed.
 directory = "target/lambda/release"
