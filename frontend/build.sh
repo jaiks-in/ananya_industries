@@ -1,13 +1,20 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
 # Install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-source $HOME/.cargo/env
+
+# Load Cargo into PATH
+. "$HOME/.cargo/env"
+
+# Set Rust stable as default
 rustup default stable
 
-# Install Trunk
+# Install the WebAssembly target
+rustup target add wasm32-unknown-unknown
+
+# Install trunk
 cargo install --locked trunk
 
-# Build the Leptos project
+# Build Leptos project
 trunk build
