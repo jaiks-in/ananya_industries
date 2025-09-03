@@ -1,0 +1,17 @@
+[build]
+# First, install the necessary `cargo-leptos` tool, then run the build command.
+# The `&&` operator ensures the second command only runs if the first one succeeds.
+command = " cargo  build --release --output-name netlify"
+
+# This is the directory where the compiled static files (HTML, CSS, JS) are placed.
+publish = "target/site"
+
+[functions]
+# This is the directory where the Rust serverless function is placed.
+directory = "target/lambda/release"
+
+[[redirects]]
+# This redirects all traffic to the serverless function, which handles all routing.
+from = "/*"
+to = "/.netlify/functions/server"
+status = 200

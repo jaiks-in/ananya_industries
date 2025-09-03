@@ -55,7 +55,9 @@ pub fn HomePage() -> impl IntoView {
 
 
             </div>
-        <div class="about_section">
+
+
+        <div>
         <div class="about_points">
                     <div class="point">
                         <h3 class="icon-star">Corrugated Boxes (Peti)</h3>
@@ -86,7 +88,6 @@ pub fn HomePage() -> impl IntoView {
                         </p>
                     </div>
                 </div>
-
         </div>
             </div>
 

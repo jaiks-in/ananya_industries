@@ -152,7 +152,7 @@ body {
     position: absolute;
     height: 1px;
     width: 2px;
-    top: 50%; /* center vertically */
+    top: 55%; /* center vertically */
     left: 0;
     width: 100%;
     padding: 0 20px; /* स्पेसिंग ठीक की गई है */
@@ -221,9 +221,15 @@ body {
 }
 
 .about_points {
+    flex: 1;
+    min-width: 300px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: var(--shadow);
     display: flex;
     flex-direction: row;
-    gap: 16px;
+    gap: 24px;
 }
 
 .point {
