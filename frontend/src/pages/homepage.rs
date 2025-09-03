@@ -9,7 +9,8 @@ pub fn HomePage() -> impl IntoView {
         "https://res.cloudinary.com/dtc2dfweh/image/upload/v1756829697/Gemini_Generated_Image_rlx1eorlx1eorlx1_cxl3no.png",
         "https://res.cloudinary.com/dtc2dfweh/image/upload/v1756829694/Gemini_Generated_Image_2vt0vu2vt0vu2vt0_zxvgfm.png",
         "https://res.cloudinary.com/dtc2dfweh/image/upload/v1756829689/Gemini_Generated_Image_cbr682cbr682cbr6_yntnsz.png",
-        "https://res.cloudinary.com/dtc2dfweh/image/upload/v1756829688/Gemini_Generated_Image_6511cs6511cs6511_dqedee.png"
+        "https://res.cloudinary.com/dtc2dfweh/image/upload/v1756829688/Gemini_Generated_Image_6511cs6511cs6511_dqedee.png",
+        "https://res.cloudinary.com/dtc2dfweh/image/upload/v1756881022/ChatGPT_Image_Sep_3_2025_11_59_13_AM_bihzna.png"
     ];
     let total = collection.len();
     println!("{:?}", total);
@@ -20,7 +21,7 @@ pub fn HomePage() -> impl IntoView {
                 *i = if *i == total - 1 { 0 } else { *i + 1 }
             })
         },
-        Duration::from_secs(5),
+        Duration::from_secs(2),
     );
 
     view! {
@@ -30,14 +31,15 @@ pub fn HomePage() -> impl IntoView {
                     <img src=move || collection[current.get() as usize] alt="slides"/>
                 </div>
                 <div class="slider_controls">
-                    <button on:click=move |_| {
-                        let next = if current.get() == total - 1 { 0 } else { current.get() + 1 };
-                        set_current.set(next);
-                    }>Next</button>
-                    <button on:click=move |_| {
+        <button class="prev_btn" on:click=move |_| {
                         let prev = if current.get() == 0 { total - 1 } else { current.get() - 1 };
                         set_current.set(prev);
-                    }>Prev</button>
+                    }>"<<<"</button>
+        <button class="next_btn" on:click=move |_| {
+                        let next = if current.get() == total - 1 { 0 } else { current.get() + 1 };
+                        set_current.set(next);
+                    }>">>>"</button>
+
                 </div>
             </section>
 
@@ -50,7 +52,11 @@ pub fn HomePage() -> impl IntoView {
                     of any product.
                 </p>
 
-                <div class="about_points">
+
+
+            </div>
+        <div class="about_section">
+        <div class="about_points">
                     <div class="point">
                         <h3 class="icon-star">Corrugated Boxes (Peti)</h3>
                         <p>
@@ -81,24 +87,8 @@ pub fn HomePage() -> impl IntoView {
                     </div>
                 </div>
 
-                <p class="closing">
-                    At Ananya Industries, we combine modern manufacturing techniques with
-                    premium materials to ensure that every box not only protects but also
-                    adds value to your product presentation.
-                </p>
-        <div class="owner_message">
-                <h2>A Message from the Owner</h2>
-                <p>
-                    "At Ananya Industries, our mission is simple – to provide packaging that builds trust
-                    and creates value for every customer. From bulk supply to premium boxes, we believe
-                    packaging is not just about protection, but also about presentation and pride.
-                    Every box we make carries our commitment to quality, honesty, and customer satisfaction."
-                </p>
-                <p><strong>Jai Sharma (Owner, Ananya Industries)</strong></p>
-            </div>
-            </div>
-
-
         </div>
+            </div>
+
     }
 }

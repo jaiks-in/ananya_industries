@@ -9,7 +9,7 @@ pub fn App()->impl IntoView{
 
         <Router>
          <NavBar::NavBar/>
-        <main>
+        <main class="app_container">
             <Routes >
             <Route path="/" view = HomePage::HomePage/>
             <Route path="/packaging_box" view= Packaging_Box::Packaging_Box/>
