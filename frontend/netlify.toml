@@ -1,7 +1,14 @@
+
 [build]
-# First, install the necessary `cargo-leptos` tool, then run the build command.
-command = "cargo install --locked trunk && trunk build"
-  publish = "target/site"
+command = """
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source $HOME/.cargo/env
+    rustup default stable
+    cargo install --locked trunk
+    trunk build
+  """
+publish = "target/site"
+
 [functions]
 # This is the directory where the Rust serverless function is placed.
 directory = "target/lambda/release"
