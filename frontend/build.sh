@@ -1,20 +1,26 @@
 #!/bin/sh
 set -e
 
-# Install Rust
+echo "🚀 Installing Rust toolchain..."
+# Install Rust non-interactively
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-# Load Cargo into PATH
+# Load cargo into PATH (works with /bin/sh)
 . "$HOME/.cargo/env"
 
-# Set Rust stable as default
+echo "✅ Rust installed. Version:"
+rustc --version
+
+echo "📦 Setting Rust default toolchain..."
 rustup default stable
 
-# Install the WebAssembly target
+echo "🌐 Adding WebAssembly target..."
 rustup target add wasm32-unknown-unknown
 
-# Install trunk
+echo "🔧 Installing Trunk..."
 cargo install --locked trunk
 
-# Build Leptos project
-trunk build
+echo "🏗️ Building project with Trunk..."
+trunk build --release
+
+echo "🎉 Build finished. Files are in target/site"

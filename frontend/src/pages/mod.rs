@@ -1,4 +1,4 @@
-pub mod HomePage;
-pub mod Packaging_Box;
+pub mod homepage;
+pub mod packaging_box;
 
 pub mod contact_us;
