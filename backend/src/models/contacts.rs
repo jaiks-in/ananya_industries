@@ -1,13 +1,13 @@
-use serde::{Serialize,Deserialine};
+use serde::{Serialize, Deserialize};
 use sqlx::FromRow;
 use chrono::NaiveDateTime;
 
-#[derive(Debug,Deserialine)]
+#[derive(Debug,Serialize,Deserialize)]
 pub struct CreateContact{
     pub name :String,
     pub email:String,
     pub mobile:String,
-    pub messsage:string,
+    pub message:String,
 }
 #[derive(Debug,Serialize,FromRow)]
 pub struct Contact{

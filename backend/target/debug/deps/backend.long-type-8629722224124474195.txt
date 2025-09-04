@@ -1,0 +1,2 @@
+fn(axum::extract::State<Pool<Postgres>>, axum::Json<Contact>) -> impl Future<Output = impl IntoResponse> {create_contact_handler}
+fn(axum::extract::State<Pool<Postgres>>, axum::Json<Contact>) -> impl Future<Output = impl IntoResponse> {create_contact_handler}: Handler<_, _>
