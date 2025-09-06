@@ -11,7 +11,6 @@ use crate::routes::contact::create_contact_handler;
 mod routes;
 mod models;
 mod utils;
-mod db;
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
