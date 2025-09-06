@@ -1,30 +1,47 @@
-mod db;
-mod models;
-mod routes;
-
-use axum::{routing::{get, post}, Router};
-use dotenv::dotenv;
-use std::env;
+use axum::{
+    routing::{post, get},
+    extract::State,
+    http::StatusCode,
+    Json,
+    Router,
+};
 use sqlx::PgPool;
-use crate::routes::users::{get_user_handler,create_user};
+use std::net::SocketAddr;
+use tokio::net::TcpListener;
+use crate::routes::auth::{login, signup};
+use tower_http::cors::CorsLayer;
+
+mod routes;
+mod models;
+mod utils;
+
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    dotenv().ok();
-    let database_url = env::var("DATABASE_URL")
-        .expect("DATABASE_URL must be set (put it in .env or env vars)");
+async fn main() -> Result<(), anyhow::Error> {
+    // Load environment variables from .env
+    dotenv::dotenv().ok();
+    let cors=CorsLayer::new()
+        // Allow requests from your front-end origin.
+        // For development, you can allow all origins using `any()`.
+        .allow_origin(tower_http::cors::Any)
+        // Allow common headers
+        .allow_headers([axum::http::header::CONTENT_TYPE])
+        // Allow the POST method
+        .allow_methods([axum::http::Method::POST]);
+    // Database pool
+    let database_url = std::env::var("DATABASE_URL")
+        .expect("DATABASE_URL must be set in .env");
+    let pool = PgPool::connect(&database_url).await?;
 
-    // initialize DB
-    let pool: PgPool = db::init_db(&database_url).await?;
-
-    // build routes
+    // Build our application with routes
     let app = Router::new()
-        .route("/users", post(create_user))
-        .route("/users/:id",get(get_user_handler))
-        .route("/contacts", post(routes::contact::create_contact_handler).get(routes::contact::get_all_contact_data_handler))
-        .with_state(pool);
+        .route("/signup", post(signup))
+        .route("/login", post(login))
+        .route("/dashboard", get(routes::dashboard::dashboard))  // Protected route
+        .with_state(pool).layer(cors);
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    axum::serve(listener, app).await.unwrap();
-
+    // Start server
+    let addr = TcpListener::bind(("0.0.0.0", 3000)).await?;
+    println!("Server running at http://{:?}", addr);
+    axum::serve(addr,app).await?;
     Ok(())
 }

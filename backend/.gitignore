@@ -1,0 +1,15 @@
+# Rust build
+/target/
+
+# dotenv environment files
+.env
+.env.*
+
+# Editor files
+.vscode/
+*.swp
+.DS_Store
+
+# WASM build artifacts
+pkg/
+dist/

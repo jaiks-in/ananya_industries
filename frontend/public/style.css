@@ -1,3 +1,8 @@
+/* Import dashboard styles */
+@import url("dashboard.css");
+@import url("login.css");
+@import url("signup.css");
+
 /* ===========================
    GLOBAL RESET & VARIABLES
 =========================== */
