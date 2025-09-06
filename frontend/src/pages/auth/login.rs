@@ -25,7 +25,7 @@ pub fn LoginPage() -> impl IntoView {
         // This ensures the outer `login_handler` can be called multiple times.
         let navigate = navigate.clone();
         spawn_local(async move {
-            let request_result = Request::post("http://localhost:3000/login")
+            let request_result = Request::post("https://ananya-industries.onrender.com")
                 .header("Content-Type", "application/json")
                 .body(body.to_string());
 

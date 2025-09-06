@@ -27,7 +27,7 @@ pub fn ContactForm() -> impl IntoView {
         });
         logging::log!("{}",body.to_string());
         spawn_local(async move {
-            let request = Request::post("http://localhost:3000/contacts")
+            let request = Request::post("https://ananya-industries.onrender.com/contacts")
                 .header("Content-Type", "application/json")
                 .body(body.to_string());
 

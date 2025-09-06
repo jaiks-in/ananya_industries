@@ -43,7 +43,7 @@ pub fn SignupPage() -> impl IntoView {
         let set_error_message = set_error_message.clone();
 
         spawn_local(async move {
-            let request_result = Request::post("http://localhost:3000/signup")
+            let request_result = Request::post("https://ananya-industries.onrender.com/signup")
                 .header("Content-Type", "application/json")
                 .body(body.to_string());
 
