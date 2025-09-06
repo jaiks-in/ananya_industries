@@ -120,7 +120,7 @@ pub fn SignupPage() -> impl IntoView {
                 <button type="submit">"Sign Up"</button>
             </form>
 
-            <p>
+            <p class="login_suggestion">
     "Already have an account? "
     <span style="color: blue; cursor: pointer;" on:click=move |_| {
         navigate_login("/login", Default::default());

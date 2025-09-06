@@ -2,12 +2,12 @@ use leptos::*;
 use web_sys::SubmitEvent;
 use gloo_net::http::Request;
 use serde_json::json;
+use wasm_bindgen_futures::spawn_local;
 
 #[component]
 pub fn ContactForm() -> impl IntoView {
-    let (name, set_name) = create_signal("".to_string());
-    let (middlename, set_middlename) = create_signal("".to_string());
-    let (lastname, set_lastname) = create_signal("".to_string());
+    let (full_name,set_full_name)=create_signal(String::new());
+    let (organisation_name,set_organisation_name)=create_signal(String::new());
     let (mobile_number, set_mobile_number) = create_signal("".to_string());
     let (email, set_email) = create_signal("".to_string());
     let (message, set_message) = create_signal("".to_string());
@@ -17,17 +17,17 @@ pub fn ContactForm() -> impl IntoView {
     // Submit handler
     let submit_handler = move |ev: SubmitEvent| {
         ev.prevent_default();
-        let full_name=format!("{},{},{}",name.get(),middlename.get(),lastname.get());
         // Collect values
         let body = json!({
             "name": full_name,
             "email": email.get(),
+            "organisation_name": organisation_name.get(), // <-- यहाँ परिवर्तन किया गया है
             "mobile": mobile_number.get(),
             "message": message.get(),
         });
         logging::log!("{}",body.to_string());
         spawn_local(async move {
-            let request = Request::post("https://ananya-industries.onrender.com/contacts")
+            let request = Request::post("https://ananya-industries.onrender.com/contact")
                 .header("Content-Type", "application/json")
                 .body(body.to_string());
 
@@ -54,9 +54,8 @@ pub fn ContactForm() -> impl IntoView {
             set_modal.set(true);
 
             // Reset fields
-            set_name.set("".to_string());
-            set_middlename.set("".to_string());
-            set_lastname.set("".to_string());
+            set_full_name.set("".to_string());
+            set_organisation_name.set("".to_string());
             set_mobile_number.set("".to_string());
             set_email.set("".to_string());
             set_message.set("".to_string());
@@ -68,23 +67,18 @@ pub fn ContactForm() -> impl IntoView {
         <div>
             <section class="contact_section">
                 <form class="inquiry_form" on:submit=submit_handler>
-                    <label for="name">"Enter your Name"</label>
+                    <label for="name">"Enter your Full Name"</label>
                     <input id="name" type="text"
-                        value=name.get()
-                        on:input=move |ev| set_name.set(event_target_value(&ev))
+                        value=full_name.get()
+                        on:input=move |ev| set_full_name.set(event_target_value(&ev))
                         required=true
                     />
 
-                    <label for="middlename">"Middle Name"</label>
-                    <input id="middlename" type="text"
-                        value=middlename.get()
-                        on:input=move |ev| set_middlename.set(event_target_value(&ev))
-                    />
-
-                    <label for="lastname">"Last Name"</label>
-                    <input id="lastname" type="text"
-                        value=lastname.get()
-                        on:input=move |ev| set_lastname.set(event_target_value(&ev))
+                    <label for="organisation-name">"Enter your Organisation Name"</label>
+                    <input id="organisation-name" type="text"
+                        value=organisation_name.get()
+                        on:input=move |ev| set_organisation_name.set(event_target_value(&ev))
+                        required=true
                     />
 
                     <label for="mobile">"Mobile Number"</label>

@@ -11,6 +11,7 @@ pub fn LoginPage() -> impl IntoView {
     let (password, set_password) = create_signal(String::new());
     let (error_message, set_error_message) = create_signal(String::new());
     let navigate = use_navigate();
+    let navigate_signup=use_navigate();
 
     let login_handler = move |ev: SubmitEvent| {
         ev.prevent_default();
@@ -25,7 +26,7 @@ pub fn LoginPage() -> impl IntoView {
         // This ensures the outer `login_handler` can be called multiple times.
         let navigate = navigate.clone();
         spawn_local(async move {
-            let request_result = Request::post("https://ananya-industries.onrender.com")
+            let request_result = Request::post("https://ananya-industries.onrender.com/login")
                 .header("Content-Type", "application/json")
                 .body(body.to_string());
 
@@ -99,6 +100,14 @@ pub fn LoginPage() -> impl IntoView {
 
                 <button type="submit">"Login"</button>
             </form>
+         <p class="signup_suggestion">
+    "Don't have an account? "
+    <span style="color: blue; cursor: pointer;" on:click=move |_| {
+        navigate_signup("/signup", Default::default());
+    }>
+        "Sign up here!"
+    </span>
+</p>
         </div>
     }
 }
