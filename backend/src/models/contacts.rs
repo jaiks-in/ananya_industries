@@ -5,7 +5,8 @@ use chrono::NaiveDateTime;
 #[derive(Debug,Serialize,Deserialize)]
 pub struct CreateContact{
     pub name :String,
-    pub email:String,
+    pub organization:String,
+    pub email:String,s
     pub mobile:String,
     pub message:String,
 }
@@ -13,6 +14,7 @@ pub struct CreateContact{
 pub struct Contact{
     pub id:i32,
     pub name:String,
+    pub organization:String,
     pub email:String,
     pub mobile:String,
     pub message:String,
