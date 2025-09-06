@@ -6,7 +6,7 @@ use chrono::NaiveDateTime;
 pub struct CreateContact{
     pub name :String,
     pub organization:String,
-    pub email:String,s
+    pub email:String,
     pub mobile:String,
     pub message:String,
 }

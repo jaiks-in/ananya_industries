@@ -1,12 +1,8 @@
 use axum::{
     routing::{post, get},
-    extract::State,
-    http::StatusCode,
-    Json,
     Router,
 };
 use sqlx::PgPool;
-use std::net::SocketAddr;
 use tokio::net::TcpListener;
 use crate::routes::auth::{login, signup};
 use tower_http::cors::CorsLayer;
