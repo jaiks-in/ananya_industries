@@ -22,16 +22,16 @@ pub async fn get_all_contact_data_handler(State(pool):State<PgPool>) -> impl Int
 ) -> impl IntoResponse {
     let create_contact_result = sqlx::query_as::<_, Contact>(
         r#"
-    INSERT INTO contacts(name,organization, email, mobile, message, created_at)
+    INSERT INTO contacts(name, email, mobile, message, organisation_name,created_at)
     VALUES ($1, $2, $3, $4, $5,$6)
-    RETURNING id, name,organization ,email, mobile, message, created_at
+    RETURNING id, name,email, mobile, message,organisation_name, created_at
     "#
     )
         .bind(payload.name)
-        .bind(payload.organization)
         .bind(payload.email)
         .bind(payload.mobile)
         .bind(payload.message)
+        .bind(payload.organisation_name)
         .bind(Utc::now().naive_utc())
         .fetch_one(&pool)
         .await;

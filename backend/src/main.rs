@@ -6,13 +6,20 @@ use sqlx::PgPool;
 use tokio::net::TcpListener;
 use crate::routes::auth::{login, signup};
 use tower_http::cors::CorsLayer;
+use crate::routes::contact::create_contact_handler;
 
 mod routes;
 mod models;
 mod utils;
+mod db;
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
+
+
+
+
+
     // Load environment variables from .env
     dotenv::dotenv().ok();
     let cors=CorsLayer::new()
@@ -21,6 +28,8 @@ async fn main() -> Result<(), anyhow::Error> {
         .allow_origin(tower_http::cors::Any)
         // Allow common headers
         .allow_headers([axum::http::header::CONTENT_TYPE])
+        .allow_credentials(true)
+        .allow_private_network(true)
         // Allow the POST method
         .allow_methods([axum::http::Method::POST]);
     // Database pool
@@ -32,6 +41,7 @@ async fn main() -> Result<(), anyhow::Error> {
     let app = Router::new()
         .route("/signup", post(signup))
         .route("/login", post(login))
+        .route("/contact",post(create_contact_handler))
         .route("/dashboard", get(routes::dashboard::dashboard))  // Protected route
         .with_state(pool).layer(cors);
 
