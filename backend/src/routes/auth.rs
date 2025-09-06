@@ -40,7 +40,7 @@ pub async fn signup(State(pool): State<PgPool>, Json(payload): Json<NewUser>) ->
     }
 }
 
-/// Login
+/// Login  ok
 pub async fn login(State(pool): State<PgPool>, Json(payload): Json<LoginPayload>) -> impl IntoResponse {
     let rec = sqlx::query_as::<_, User>(
         "SELECT * FROM users WHERE email = $1"
