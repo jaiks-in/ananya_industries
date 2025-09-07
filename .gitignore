@@ -1,2 +1,42 @@
-# Local Netlify folder
-.netlify
+# Rust / Cargo
+target/
+**/*.rs.bk
+**/*.rs.old
+**/*.log
+
+# Cargo cache (optional, can be huge)
+# ~/.cargo/
+
+# Dependencies
+**/Cargo.lock
+
+# Leptos WASM build artifacts
+pkg/
+dist/
+build/
+*.wasm
+
+# Node / JS (if using npm/yarn)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# VSCode / IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Editor temporary files
+*~
+*.swp
