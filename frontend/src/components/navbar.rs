@@ -12,7 +12,6 @@ pub fn NavBar() -> impl IntoView {
             <nav class="navbar_item">
                 <A href="/">"Home"</A>
                 <A href="/dashboard">"Dashboard"</A>
-                <A href="/contact">"Contact"</A>
                 <A href="/login">"Login"</A>
             </nav>
         </header>

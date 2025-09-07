@@ -1,3 +1,3 @@
 pub mod navbar;
-pub mod contact_form;
-mod inquery;
+
+pub mod packaging_box;

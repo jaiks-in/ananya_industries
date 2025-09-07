@@ -1,0 +1,100 @@
+/* --- Root Variables for Form Styling --- */
+:root {
+    --surface: #ffffff;
+    --main-dark-blue: #0a1128;
+    --metallic-silver-gradient: linear-gradient(90deg, #6c757d, #adb5bd, #dee2e6, #adb5bd, #6c757d);
+    --text-color: #0a1128;
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    --hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    --radius: 8px;
+    --transition: 0.3s ease-in-out;
+}
+
+/* ===========================
+CONTACT FORM
+=========================== */
+.contact-section {
+    width: 75%;
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.contact-section h3 {
+    font-size: 2rem;
+    color: #343a40;
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.contact-section h3::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: var(--metallic-silver-gradient);
+    margin: 10px auto 0;
+}
+
+.inquiry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inquiry-form label {
+    color: #495057;
+    font-weight: 500;
+}
+
+.inquiry-form input,
+.inquiry-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inquiry-form input:focus,
+.inquiry-form textarea:focus {
+    border-color: var(--main-dark-blue);
+    box-shadow: 0 0 0 0.2rem rgba(10, 17, 40, 0.1);
+    outline: none;
+}
+
+.inquiry-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.inquiry-form button {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--metallic-silver-gradient);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.inquiry-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
