@@ -1,1 +1,0 @@
-fn(RouteProps<_, impl leptos::IntoView, &str>) -> impl leptos::IntoView {leptos_router::Route::<_, impl leptos::IntoView, &str>}
