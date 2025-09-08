@@ -32,7 +32,7 @@ pub async fn get_all_contact_data_handler(State(pool):State<PgPool>) -> impl Int
         .bind(payload.mobile)
         .bind(payload.message)
         .bind(payload.organisation_name)
-        .bind(Utc::now().naive_utc())
+        .bind((Utc::now().naive_utc()))
         .fetch_one(&pool)
         .await;
 

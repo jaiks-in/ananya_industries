@@ -14,7 +14,7 @@ dotenv = "0.15"
 json-web-token = "0.2.0"
 jsonwebtoken = "9.3.1"
 # sqlx ke liye postgres + chrono enable karna zaroori hai
-sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono"] }
+sqlx = { version = "0.8.6", features = ["postgres", "runtime-tokio-native-tls", "chrono"] }
 bcrypt = "0.17.0"
 chrono = { version = "0.4", features = ["serde"] }
 tower = "0.5.2"

@@ -4,13 +4,14 @@ use axum::{
 };
 use sqlx::PgPool;
 use tokio::net::TcpListener;
-use crate::routes::auth::{login, signup};
+use crate::api::auth::{login, signup};
 use tower_http::cors::CorsLayer;
-use crate::routes::contact::create_contact_handler;
+use crate::api::dashboard::dashboard;
+use crate::api::contact::{create_contact_handler,get_all_contact_data_handler};
 
-mod routes;
 mod models;
 mod utils;
+mod api;
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
@@ -25,10 +26,10 @@ async fn main() -> Result<(), anyhow::Error> {
     let pool = PgPool::connect(&database_url).await?;
 
     let app = Router::new()
-        .route("/signup", post(signup))
-        .route("/login", post(login))
-        .route("/contact",post(create_contact_handler))
-        .route("/dashboard", get(routes::dashboard::dashboard))
+        // .route("/signup", post(signup))
+        // .route("/login", post(login))
+        .route("/contacts",post(create_contact_handler))
+        .route("/dashboard", get(dashboard))
         .with_state(pool).layer(cors);
 
     let addr = TcpListener::bind(("0.0.0.0", 3000)).await?;
