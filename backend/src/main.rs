@@ -4,10 +4,9 @@ use axum::{
 };
 use sqlx::PgPool;
 use tokio::net::TcpListener;
-use crate::api::auth::{login, signup};
 use tower_http::cors::CorsLayer;
 use crate::api::dashboard::dashboard;
-use crate::api::contact::{create_contact_handler,get_all_contact_data_handler};
+use crate::api::contact::create_contact_handler;
 
 mod models;
 mod utils;
